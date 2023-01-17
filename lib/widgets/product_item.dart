@@ -14,19 +14,24 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = Provider.of<Product>(context);
+    final product = Provider.of<Product>(context,
+        listen:
+            false); // Provider.of(context) triggers a build of the entire widget tree although you can handle that with clever widget splitting
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
         footer: GridTileBar(
           backgroundColor: Colors.black87,
-          leading: IconButton(
-            onPressed: () {
-              product.toggleFavoriteStatus();
-            },
-            icon: Icon(
-                product.isFavorite ? Icons.favorite : Icons.favorite_border),
-            color: Theme.of(context).colorScheme.secondary,
+          leading: Consumer<Product>(
+            // rebuilds only part of the widget tree instead of the entire widget tree
+            builder: (ctx, product, _) => IconButton(
+              onPressed: () {
+                product.toggleFavoriteStatus();
+              },
+              icon: Icon(
+                  product.isFavorite ? Icons.favorite : Icons.favorite_border),
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
           title: Text(
             product.title,
