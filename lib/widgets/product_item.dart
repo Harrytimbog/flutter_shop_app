@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../providers/product.dart';
 import 'package:provider/provider.dart';
+import '../providers/cart.dart';
+import '../providers/product.dart';
 import '../screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
@@ -17,6 +18,9 @@ class ProductItem extends StatelessWidget {
     final product = Provider.of<Product>(context,
         listen:
             true); // Provider.of(context) triggers a build of the entire widget tree although you can handle that with clever widget splitting
+    final cart = Provider.of<Cart>(context,
+        listen:
+            false); // not interesteed in changes to the cart, I just want to dispatch an action
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -38,7 +42,9 @@ class ProductItem extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           trailing: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                cart.addItem(product.id, product.price, product.title);
+              },
               icon: Icon(
                 Icons.shopping_cart,
                 color: Theme.of(context).colorScheme.secondary,
