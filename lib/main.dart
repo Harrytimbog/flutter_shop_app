@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './providers/cart.dart';
 import 'package:provider/provider.dart';
 import './screens/products_overview_screen.dart';
 import './screens/product_detail_screen.dart';
@@ -11,9 +12,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      // Better approach compared to ChangeNotifierProvider.value in this situation (you are newly creating a new object based on a class | since you are not reusing existing objects)
-      create: (ctx) => ProductsProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          // Better approach compared to ChangeNotifierProvider.value in this situation (you are newly creating a new object based on a class | since you are not reusing existing objects)
+          create: (ctx) => ProductsProvider(),
+        ),
+        ChangeNotifierProvider(
+          // Better approach compared to ChangeNotifierProvider.value in this situation (you are newly creating a new object based on a class | since you are not reusing existing objects)
+          create: (ctx) => Cart(),
+        )
+      ],
       child: MaterialApp(
         title: 'MyShop',
         theme: ThemeData(
