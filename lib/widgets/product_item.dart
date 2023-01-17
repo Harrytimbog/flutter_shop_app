@@ -16,7 +16,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context,
         listen:
-            false); // Provider.of(context) triggers a build of the entire widget tree although you can handle that with clever widget splitting
+            true); // Provider.of(context) triggers a build of the entire widget tree although you can handle that with clever widget splitting
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
