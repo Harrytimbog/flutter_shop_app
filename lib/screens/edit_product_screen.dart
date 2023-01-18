@@ -15,17 +15,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
       appBar: AppBar(
         title: const Text('Edit Product'),
       ),
-      // You can use column or SingleChildScrollView if your form will be long
+      // You can use ListView if your form won't be long and als if the page won't look bad landscape view
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-            child: ListView(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Title'),
-              textInputAction: TextInputAction.next,
-            )
-          ],
+            child: SingleChildScrollView(
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Title'),
+                textInputAction: TextInputAction.next,
+              )
+            ],
+          ),
         )),
       ),
     );
