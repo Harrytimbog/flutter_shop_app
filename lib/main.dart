@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import './screens/products_overview_screen.dart';
 import './screens/product_detail_screen.dart';
 import './providers/products_provider.dart';
+import './providers/order.dart';
 import './screens/cart_screen.dart';
 
 void main() => runApp(const MyApp());
@@ -22,7 +23,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           // Better approach compared to ChangeNotifierProvider.value in this situation (you are newly creating a new object based on a class | since you are not reusing existing objects)
           create: (ctx) => Cart(),
-        )
+        ),
+        ChangeNotifierProvider(
+          // Better approach compared to ChangeNotifierProvider.value in this situation (you are newly creating a new object based on a class | since you are not reusing existing objects)
+          create: (ctx) => Orders(),
+        ),
       ],
       child: MaterialApp(
         title: 'MyShop',
