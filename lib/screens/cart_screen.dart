@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 // To ask to import Cart only from the file extension so the name clash for CartItems in cart.dart and cart_item.dart can be handled carefully nn seperately
 import '../providers/cart.dart' show Cart;
 import '../widgets/cart_item.dart';
+import '../providers/order.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -43,7 +44,11 @@ class CartScreen extends StatelessWidget {
                     backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<Orders>(context, listen: false).addOrder(
+                          cart.items.values.toList(), cart.totalAmount);
+                      cart.clear();
+                    },
                     style: TextButton.styleFrom(
                         foregroundColor: Theme.of(context).colorScheme.primary),
                     child: const Text('ORDER NOW'),
