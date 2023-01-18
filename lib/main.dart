@@ -6,6 +6,7 @@ import './screens/product_detail_screen.dart';
 import './providers/products_provider.dart';
 import './providers/order.dart';
 import './screens/cart_screen.dart';
+import './screens/orders_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         routes: {
           ProductDetailScreen.routeName: (ctx) => const ProductDetailScreen(),
           CartScreen.routeName: (ctx) => const CartScreen(),
+          OrdersScreen.routeName: (ctx) => const OrdersScreen(),
         },
       ),
     );
