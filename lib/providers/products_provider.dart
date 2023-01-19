@@ -66,10 +66,10 @@ class ProductsProvider with ChangeNotifier {
     return _items.firstWhere((product) => product.id == id);
   }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
     final url = Uri.parse(
         'https://flutter-store-9c0fe-default-rtdb.europe-west1.firebasedatabase.app/products.json');
-    http
+    return http
         .post(
       url,
       body: json.encode({
