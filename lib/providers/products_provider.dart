@@ -85,8 +85,9 @@ class ProductsProvider with ChangeNotifier {
       // _items.insert(0, newProduct); // at the start of the list
       notifyListeners();
     } catch (error) {
-      print(error);
-      throw error;
+      // print(error);
+      rethrow;
+      // throw error;
     }
   }
 
@@ -121,7 +122,7 @@ class ProductsProvider with ChangeNotifier {
     notifyListeners();
     final response = await http.delete(url);
     if (response.statusCode >= 400) {
-      _items.insert(existingProductIndex, existingProduct!);
+      _items.insert(existingProductIndex, existingProduct);
       notifyListeners();
       throw HttpException('Could not delete product.');
     }
