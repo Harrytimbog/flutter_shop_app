@@ -37,10 +37,12 @@ class _OrdersScreenState extends State<OrdersScreen> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : ListView.builder(
-              itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-              itemCount: orderData.orders.length,
-            ),
+          : (orderData.orders.isEmpty
+              ? const Center(child: Text('You have no order history yet!'))
+              : ListView.builder(
+                  itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
+                  itemCount: orderData.orders.length,
+                )),
     );
   }
 }
