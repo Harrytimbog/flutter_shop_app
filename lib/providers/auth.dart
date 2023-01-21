@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -7,6 +9,20 @@ class Auth with ChangeNotifier {
   late String _token;
   late DateTime _expiryDate;
   late String _userId;
+
+  bool get isAuth {
+    return token != null;
+  }
+
+  String? get token {
+    if (_expiryDate != null &&
+        _expiryDate.isAfter(DateTime.now()) &&
+        _token != null) {
+      return _token;
+    }
+
+    return null;
+  }
 
   final apiKey = "AIzaSyAYx3kQ6ktk7sB0bsfp-xGAo03N2cmiLsU";
 
@@ -35,6 +51,14 @@ class Auth with ChangeNotifier {
         throw HttpException(responseData['error']['message']);
         // return Future.error(HttpException(responseData['error']['message']));
       }
+      _token = responseData['idToken'];
+      _userId = responseData['localId'];
+      _expiryDate = DateTime.now().add(
+        Duration(
+          seconds: int.parse(responseData['expiresIn']),
+        ),
+      );
+      notifyListeners();
     } catch (error) {
       rethrow;
     }
