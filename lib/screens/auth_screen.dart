@@ -11,7 +11,9 @@ enum AuthMode { Signup, Login }
 class AuthScreen extends StatelessWidget {
   static const routeName = '/auth';
 
-  const AuthScreen({super.key});
+  const AuthScreen({Key key}) : super(key: key);
+
+  // const AuthScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,7 @@ class AuthScreen extends StatelessWidget {
                       child: Text(
                         'WolfShop',
                         style: TextStyle(
-                          color: Theme.of(context).textTheme.headline6!.color,
+                          color: Theme.of(context).textTheme.headline6.color,
                           fontSize: 50,
                           fontFamily: 'Anton',
                           fontWeight: FontWeight.normal,
@@ -89,7 +91,7 @@ class AuthScreen extends StatelessWidget {
 
 class AuthCard extends StatefulWidget {
   const AuthCard({
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override
@@ -125,11 +127,11 @@ class _AuthCardState extends State<AuthCard> {
   }
 
   Future<void> _submit() async {
-    if (!_formKey.currentState!.validate()) {
+    if (!_formKey.currentState.validate()) {
       // Invalid!
       return;
     }
-    _formKey.currentState!.save();
+    _formKey.currentState.save();
     setState(() {
       _isLoading = true;
     });
@@ -137,11 +139,11 @@ class _AuthCardState extends State<AuthCard> {
       if (_authMode == AuthMode.Login) {
         // Log user in
         await Provider.of<Auth>(context, listen: false)
-            .signin(_authData['email']!, _authData['password']!);
+            .signin(_authData['email'], _authData['password']);
       } else {
         // Sign user up
         await Provider.of<Auth>(context, listen: false)
-            .signup(_authData['email']!, _authData['password']!);
+            .signup(_authData['email'], _authData['password']);
       }
     } on HttpException catch (error) {
       var errorMessage = 'Authentication failed!';
@@ -206,28 +208,28 @@ class _AuthCardState extends State<AuthCard> {
                   decoration: const InputDecoration(labelText: 'E-Mail'),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value!.isEmpty || !_isValidMail(value)) {
+                    if (value.isEmpty || !_isValidMail(value)) {
                       return 'Invalid email!';
                     }
                     return null;
                     // return null;
                   },
                   onSaved: (value) {
-                    _authData['email'] = value!;
+                    _authData['email'] = value;
                   },
                 ),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Password'),
                   obscureText: true,
                   controller: _passwordController,
-                  // ignore: body_might_complete_normally_nullable
+                  // ignore: body_might_complete_normally_nullable, missing_return
                   validator: (value) {
-                    if (value!.isEmpty || value.length < 5) {
+                    if (value.isEmpty || value.length < 5) {
                       return 'Password is too short!';
                     }
                   },
                   onSaved: (value) {
-                    _authData['password'] = value!;
+                    _authData['password'] = value;
                   },
                 ),
                 if (_authMode == AuthMode.Signup)
@@ -237,7 +239,7 @@ class _AuthCardState extends State<AuthCard> {
                         const InputDecoration(labelText: 'Confirm Password'),
                     obscureText: true,
                     validator: _authMode == AuthMode.Signup
-                        // ignore: body_might_complete_normally_nullable
+                        // ignore: body_might_complete_normally_nullable, missing_return
                         ? (value) {
                             if (value != _passwordController.text) {
                               return 'Passwords do not match!';

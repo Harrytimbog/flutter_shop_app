@@ -7,7 +7,8 @@ import '../widgets/app_drawer.dart';
 
 class UserProductsScreen extends StatelessWidget {
   static const routeName = '/user-products';
-  const UserProductsScreen({super.key});
+
+  const UserProductsScreen({Key key}) : super(key: key);
 
   Future<void> _refreshProducts(BuildContext context) async {
     await Provider.of<ProductsProvider>(context, listen: false)
@@ -34,7 +35,7 @@ class UserProductsScreen extends StatelessWidget {
           child: ListView.builder(
             itemBuilder: (_, i) => Column(
               children: [
-                UserProductItem(productData.items[i].id!,
+                UserProductItem(productData.items[i].id,
                     productData.items[i].title, productData.items[i].imageUrl),
                 const Divider()
               ],

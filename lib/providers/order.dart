@@ -10,10 +10,10 @@ class OrderItem {
   final DateTime dateTime;
 
   OrderItem(
-      {required this.id,
-      required this.amount,
-      required this.products,
-      required this.dateTime});
+      {@required this.id,
+      @required this.amount,
+      @required this.products,
+      @required this.dateTime});
 }
 
 class Orders with ChangeNotifier {
@@ -30,7 +30,7 @@ class Orders with ChangeNotifier {
       final response = await http.get(url);
       // print(json.decode(response.body));
       List<OrderItem> loadedOrders = [];
-      final extractedData = json.decode(response.body) as Map<String, dynamic>?;
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
 
       if (extractedData == null) {
         return;

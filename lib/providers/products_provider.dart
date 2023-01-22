@@ -39,8 +39,8 @@ class ProductsProvider with ChangeNotifier {
         'https://flutter-store-9c0fe-default-rtdb.europe-west1.firebasedatabase.app/products.json');
     try {
       final response = await http.get(url);
-      print(json.decode(response.body));
-      final extractedData = json.decode(response.body) as Map<String, dynamic>?;
+      // print(json.decode(response.body));
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Product> loadedProducts = [];
       if (extractedData == null) {
         return;
@@ -121,7 +121,7 @@ class ProductsProvider with ChangeNotifier {
     final url = Uri.parse(
         'https://flutter-store-9c0fe-default-rtdb.europe-west1.firebasedatabase.app/products/$id.json');
     final existingProductIndex = _items.indexWhere((prod) => prod.id == id);
-    Product? existingProduct = _items[existingProductIndex];
+    Product existingProduct = _items[existingProductIndex];
     _items.removeAt(existingProductIndex);
     notifyListeners();
     final response = await http.delete(url);

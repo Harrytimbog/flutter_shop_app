@@ -6,7 +6,7 @@ import '../providers/order.dart' as ord;
 class OrderItem extends StatefulWidget {
   // ord.OrderItem to resolve the name clash
   final ord.OrderItem order;
-  const OrderItem(this.order, {super.key});
+  const OrderItem(this.order, {Key key}) : super(key: key);
 
   @override
   State<OrderItem> createState() => _OrderItemState();
@@ -36,7 +36,7 @@ class _OrderItemState extends State<OrderItem> {
           if (_expanded)
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-              height: min(widget.order.products.length * 20 + 10, 100),
+              height: min(widget.order.products.length * 20.0 + 10, 100),
               child: ListView(
                 children: widget.order.products
                     .map((prod) => Row(

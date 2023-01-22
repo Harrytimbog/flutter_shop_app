@@ -5,7 +5,7 @@ import '../providers/product.dart';
 import '../screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
+  const ProductItem({Key key}) : super(key: key);
 
   // final String id;
   // final String title;
@@ -43,7 +43,7 @@ class ProductItem extends StatelessWidget {
           ),
           trailing: IconButton(
               onPressed: () {
-                cart.addItem(product.id!, product.price, product.title);
+                cart.addItem(product.id, product.price, product.title);
                 ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -55,7 +55,7 @@ class ProductItem extends StatelessWidget {
                     action: SnackBarAction(
                         label: 'UNDO',
                         onPressed: () {
-                          cart.removeSingleItem(product.id!);
+                          cart.removeSingleItem(product.id);
                         }),
                   ),
                 );

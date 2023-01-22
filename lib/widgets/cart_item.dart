@@ -10,13 +10,14 @@ class CartItem extends StatelessWidget {
   final double price;
 
   const CartItem(this.id, this.productId, this.price, this.quantity, this.title,
-      {super.key});
+      {Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // To style the price display text
     final ThemeData theme = Theme.of(context);
-    TextStyle style = theme.textTheme.headline6!.copyWith(
+    TextStyle style = theme.textTheme.headline6.copyWith(
       color: theme.colorScheme.onSecondary,
     );
 
