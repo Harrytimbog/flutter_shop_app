@@ -47,7 +47,7 @@ class ProductsProvider with ChangeNotifier {
         'https://flutter-store-9c0fe-default-rtdb.europe-west1.firebasedatabase.app/products.json?auth=$authToken&$filterString');
     try {
       final response = await http.get(url);
-      print(json.decode(response.body));
+      // print(json.decode(response.body));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Product> loadedProducts = [];
       if (extractedData == null) {
