@@ -267,13 +267,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 if (value.isEmpty) {
                                   return 'Please enter an image URL.';
                                 }
-                                if (value.startsWith('http') &&
-                                    value.startsWith('https')) {
+                                if (!value.startsWith('http') &&
+                                    !value.startsWith('https')) {
                                   return 'Please enter a valid URL.';
                                 }
-                                if (value.endsWith('.png') &&
-                                    value.endsWith('.jpg') &&
-                                    value.endsWith('.jpeg')) {
+                                if (!value.endsWith('.png') &&
+                                    !value.endsWith('.jpg') &&
+                                    !value.endsWith('.jpeg')) {
                                   return 'Please enter a valid image URL.';
                                 }
                                 return null;

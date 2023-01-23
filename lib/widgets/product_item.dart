@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart.dart';
 import '../providers/product.dart';
+import '../providers/auth.dart';
 import '../screens/product_detail_screen.dart';
 
 class ProductItem extends StatelessWidget {
@@ -21,6 +22,7 @@ class ProductItem extends StatelessWidget {
     final cart = Provider.of<Cart>(context,
         listen:
             false); // not interesteed in changes to the cart, I just want to dispatch an action
+    final authData = Provider.of<Auth>(context, listen: false);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -30,7 +32,7 @@ class ProductItem extends StatelessWidget {
             // rebuilds only part of the widget tree instead of the entire widget tree
             builder: (ctx, product, _) => IconButton(
               onPressed: () {
-                product.toggleFavoriteStatus();
+                product.toggleFavoriteStatus(authData.token);
               },
               icon: Icon(
                   product.isFavorite ? Icons.favorite : Icons.favorite_border),
