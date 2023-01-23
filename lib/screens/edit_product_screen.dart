@@ -127,6 +127,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       _isLoading = false;
     });
 
+    // ignore: use_build_context_synchronously
     Navigator.of(context).pop();
   }
 
