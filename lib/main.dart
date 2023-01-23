@@ -25,8 +25,13 @@ class MyApp extends StatelessWidget {
           // Better approach compared to ChangeNotifierProvider.value in this situation (you are newly creating a new object based on a class | since you are not reusing existing objects)
           create: (ctx) => Auth(),
         ),
-        ChangeNotifierProvider(
-          create: (ctx) => ProductsProvider(),
+        ChangeNotifierProxyProvider<Auth, ProductsProvider>(
+          create: (ctx) => ProductsProvider(null, []),
+          update: (ctx, auth, previousProductsProvider) => ProductsProvider(
+              auth.token,
+              previousProductsProvider == null
+                  ? []
+                  : previousProductsProvider.items),
         ),
         ChangeNotifierProvider(
           create: (ctx) => Cart(),
