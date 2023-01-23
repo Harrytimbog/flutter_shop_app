@@ -32,7 +32,10 @@ class ProductItem extends StatelessWidget {
             // rebuilds only part of the widget tree instead of the entire widget tree
             builder: (ctx, product, _) => IconButton(
               onPressed: () {
-                product.toggleFavoriteStatus(authData.token);
+                product.toggleFavoriteStatus(
+                  authData.token,
+                  authData.userId,
+                );
               },
               icon: Icon(
                   product.isFavorite ? Icons.favorite : Icons.favorite_border),
